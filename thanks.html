@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Stereotype Learner</title>
+
+    <!-- JQuery -->
+    <script src="static/jquery.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap core JS -->
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Validator CSS -->
+    <link href="static/validator/css/bootstrapValidator.min.css" rel="stylesheet">
+
+    <!-- Validator JS -->
+     <script src="static/validator/js/bootstrapValidator.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/style.css" rel="stylesheet">
+
+
+    <script>
+    	$(document).ready(function() {
+            
+    	});
+
+        function add() {
+            var emailStr = $('#emailInput').val();
+            $('#joinButton').html('Joining');
+            $('#joinButton').attr('disabled', 'disabled')
+            console.log(emailStr);
+            $.ajax({
+                url: 'http://friendpiechtest.appspot.com/addEmail',
+                type: 'GET',
+                data: { 
+                    email:emailStr 
+                },
+                success: function(data){ 
+                    console.log('thanks')
+                    $('#joinButton').html('Joined');
+                    success('We will email you after the study has completed.')
+                },
+                error: function(data) {
+                    console.log(data)
+                    warning('submit failed '); //or whatever
+                    $('#joinButton').html('Join');
+                    $('#joinButton').removeAttr('disabled');
+                }
+            });
+        }
+
+        function warning(msg) {
+            $('#alertPlaceholder').html("");
+            alertBar = $('<div>', {
+                'class':'alert alert-danger alert-dismissible',
+                'role':'alert'
+            });
+            alertBar.html('<b>Heads up:</b> ' + msg);
+            close = $('<button>', {
+                'class':'close', 
+                'data-dismiss':'alert',
+                'type':'button'
+            });
+            close.html('&times;')
+
+            alertBar.append(close)
+            $('#alertPlaceholder').append(alertBar)
+        }
+
+        function success(msg) {
+            $('#alertPlaceholder').html("");
+            alertBar = $('<div>', {
+                'class':'alert alert-success alert-dismissible',
+                'role':'alert'
+            });
+            alertBar.html('<b>Success:</b> ' + msg);
+            close = $('<button>', {
+                'class':'close', 
+                'data-dismiss':'alert',
+                'type':'button'
+            });
+            close.html('&times;')
+
+            alertBar.append(close)
+            $('#alertPlaceholder').append(alertBar)
+        }
+
+    </script>
+
+  </head>
+
+  <body>
+
+  	<div class="container" id="container">
+       
+        <div class="slab">
+
+
+            <div class="row" style="padding-bottom:5px;">
+                <div class="col-md-12">
+                    <h2>Thank you.</h2>
+                    <hr>
+                    <p>Enter your email and we will send you the results of the study.</p>
+                    <div class="input-group">
+                      <input type="email" class="form-control" placeholder="Email" id="emailInput">
+                      <span class="input-group-btn">
+                        <button id="joinButton" class="btn btn-primary" type="button"  onclick="add();">Join</button>
+                      </span>
+                    </div>
+                     <div id="alertPlaceholder" style="padding-top:15px;"></div>
+                     <br/><br/>
+                     <p>Hit this button to finish the Mechanical Turk task.</p>
+                     <button id="joinButton" class="btn btn-primary" type="button"  onclick="window.location.replace('http://aaalab.stanford.edu/turkgate/codes/generate.php?stamp=10483935');">Finished</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+	</div>
+  </body>
+</html>

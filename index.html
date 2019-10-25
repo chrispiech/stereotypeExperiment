@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Stereotype Learner</title>
+
+    <!-- JQuery -->
+    <script src="static/jquery.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap core JS -->
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/style.css" rel="stylesheet">
+
+
+    <script>
+        var expId = null;
+
+    	$(document).ready(function() {
+            expId = getExpId()
+    	});
+
+        function getExpId() {
+            var query = getParameterByName('expId');
+            return query.replace(/\W/g, '')
+        }
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        function start() {
+            window.location.href='exp.html?expId=' + expId;
+        }
+    </script>
+
+  </head>
+
+  <body>
+
+  	<div class="container" id="container">
+        <div class="slab">
+            <div class="row" style="padding-bottom:5px;">
+                <div class="col-md-12">
+                    <h2>Welcome</h2>
+                    <hr>
+                    <p>Thank you for participating in this research study about professionals. The following survey will assess your attitudes and beliefs. This survey is anonymous and should take approximately 3 minutes. If you have any questions about this research, please contact the researcher, Michelle Friend, at mefh@stanford.edu. </p>
+
+                    <p>If you are interested in the restuls, we will happily share them with you after the study is completed.</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-primary" onclick="start()">Lets Get Started</button>
+            </div>
+        </div>
+
+	</div>
+  </body>
+</html>
